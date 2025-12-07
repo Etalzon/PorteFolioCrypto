@@ -13,6 +13,7 @@ struct PorteFolioCryptoApp: App {
     @StateObject private var currencySettings = CurrencySettings()
 
     var body: some Scene {
+    //Fenêtre principale
         WindowGroup {
            CryptoGridView()
              .environmentObject(currencySettings)
