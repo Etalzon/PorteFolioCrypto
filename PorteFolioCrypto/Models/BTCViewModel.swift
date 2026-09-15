@@ -1,9 +1,4 @@
-//
-//  BTCViewModel.swift
-//  PorteFolioCrypto
-//
-//  Created by eric locci on 07/12/2025.
-//
+// PorteFolioCrypto/Models/BTCViewModel.swift
 
 import SwiftUI
 import Combine

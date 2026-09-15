@@ -1,15 +1,9 @@
-//
-//  CurrencySettings.swift
-//  PorteFolioCrypto
-//
-//  Created by eric locci on 07/12/2025.
-//
+// PorteFolioCrypto/ButtonTrading/CurrencySettings.swift
 
 import Foundation
 import Combine
 
 final class CurrencySettings: ObservableObject {
-   
     // "EUR" par défaut comme demandé
     @Published var selectedFiat: String = "EUR"
 
@@ -17,8 +11,6 @@ final class CurrencySettings: ObservableObject {
      init() {
          selectedFiat = UserDefaults.standard.string(forKey: "selectedFiat") ?? "EUR"
      }
-   
-   // Persister la préférence
      func save() {
          UserDefaults.standard.set(selectedFiat, forKey: "selectedFiat")
      }

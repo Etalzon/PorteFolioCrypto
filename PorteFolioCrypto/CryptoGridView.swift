@@ -1,26 +1,12 @@
-//
-//  CryptoGridView.swift
-//  PorteFolioCrypto
-//
-//  Created by eric locci on 07/12/2025.
-//
-
+// PorteFolioCrypto/CryptoGridView.swift
 import SwiftUI
 
-struct Crypto: Identifiable {
-    let id = UUID()
-    let name: String
-    let view: AnyView
-    let detailView: AnyView
-}
-
-import SwiftUI
-
+// Garde seulement la vue principale ici
 struct CryptoGridView: View {
     @StateObject private var btcVM = BTCViewModel()
-//    @StateObject private var ethVM = ETHViewModel()
-//    @StateObject private var solVM = SOLViewModel()
-//    @StateObject private var xrpVM = XRPViewModel()
+    @StateObject private var ethVM = ETHViewModel()
+    @StateObject private var solVM = SOLViewModel()
+    @StateObject private var xrpVM = XRPViewModel()
     @State private var searchText = ""
 
     let columns = [
@@ -31,9 +17,9 @@ struct CryptoGridView: View {
     var cryptos: [Crypto] {
         [
             Crypto(name: "BTC", view: AnyView(CryptoCardView(name: "BTC", image: "bitcoin_logo")), detailView: AnyView(BTCCardView(vm: btcVM))),
-//            Crypto(name: "ETH", view: AnyView(CryptoCardView(name: "ETH", image: "ethereum_logo")), detailView: AnyView(ETHCardView(vm: ethVM))),
-//            Crypto(name: "SOL", view: AnyView(CryptoCardView(name: "SOL", image: "solana_logo")), detailView: AnyView(SOLCardView(vm: solVM))),
-//            Crypto(name: "XRP", view: AnyView(CryptoCardView(name: "XRP", image: "xrp_logo")), detailView: AnyView(XRPCardView(vm: xrpVM)))
+            Crypto(name: "ETH", view: AnyView(CryptoCardView(name: "ETH", image: "ethereum_logo")), detailView: AnyView(ETHCardView(vm: ethVM))),
+            Crypto(name: "SOL", view: AnyView(CryptoCardView(name: "SOL", image: "solana_logo")), detailView: AnyView(SOLCardView(vm: solVM))),
+            Crypto(name: "XRP", view: AnyView(CryptoCardView(name: "XRP", image: "xrp_logo")), detailView: AnyView(XRPCardView(vm: xrpVM)))
         ]
     }
 
@@ -75,24 +61,6 @@ struct CryptoGridView: View {
     }
 }
 
-struct CryptoCardView: View {
-    let name: String
-    let image: String
-
-    var body: some View {
-        VStack {
-            Image(image)
-                .resizable()
-                .frame(width: 50, height: 50)
-                .clipShape(Circle())
-            Text(name)
-                .font(.headline)
-                .padding(.top, 5)
-        }
-        .padding()
-        .background(RoundedRectangle(cornerRadius: 15).fill(Color.white).shadow(radius: 3))
-    }
-}
 #Preview {
    CryptoGridView()
 }

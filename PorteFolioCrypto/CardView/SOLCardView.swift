@@ -1,17 +1,17 @@
-// PorteFolioCrypto/CardView/BTCCardView.swift
+// PorteFolioCrypto/CardView/SOLCardView.swift
 
 import SwiftUI
 import Charts
 
-struct BTCCardView: View {
-    @ObservedObject var vm: BTCViewModel
+struct SOLCardView: View {
+    @ObservedObject var vm: SOLViewModel
     @State private var appear = false
     
-    // Structure des prix pour l’historique des prix Bitcoin
-    struct PricePointBTC: Identifiable {
+    // Structure des prix pour l’historique des prix Solana
+    struct PricePointSol: Identifiable {
         let id = UUID()
         let date: Date
-        let BTCPrice: Double
+        let SOLPrice: Double
     }
     
     var body: some View {
@@ -24,21 +24,22 @@ struct BTCCardView: View {
             )
             .ignoresSafeArea()
             
+            // 2. Le contenu de la carte (votre code actuel)
             VStack(spacing: 8) {
-                // Logo
-                Image("Bitcoin_logo")
+                // Logo Solana
+                Image("Solana_logo")
                     .resizable()
                     .frame(width: 48, height: 48)
                     .foregroundColor(.orange)
                     .padding(.top, 8)
                 
-                // Symbole BTC
-                Text("BTC")
+                // Symbole ETH
+                Text("SOL")
                     .font(.headline)
                     .foregroundColor(.black) // Ajouté pour la clarté
                 
                 // Prix actuel en USD
-                Text(String(format: "%.2f $", vm.BTCPrice))
+                Text(String(format: "%.2f $", vm.SOLPrice))
                     .font(.title)
                     .bold()
                     .foregroundColor(.black) // Changé de .primary à .black
@@ -48,14 +49,14 @@ struct BTCCardView: View {
                 // Variation du prix
                 Text(vm.changeText)
                     .font(.subheadline)
-                    .foregroundColor(vm.BTCChange >= 0 ? .green : .red)
+                    .foregroundColor(vm.SOLChange >= 0 ? .green : .red)
                     .minimumScaleFactor(0.7)
                 
-                // Graphique de l’historique des prix Bitcoin
-                Chart(vm.BTCPriceHistory) { point in
+                // Graphique de l’historique des prix Ethereum
+                Chart(vm.SOLPriceHistory) { point in
                     LineMark(
                         x: .value("Date", point.date),
-                        y: .value("Prix", point.BTCPrice)
+                        y: .value("Prix", point.SOLPrice)
                     )
                 }
                 .frame(height: 120)
@@ -63,7 +64,7 @@ struct BTCCardView: View {
                 
                 // Graphique simplifié de l’historique des prix
                 Chart {
-                    ForEach(Array(vm.BTCHistory.enumerated()), id: \.offset) { index, value in
+                    ForEach(Array(vm.SOLHistory.enumerated()), id: \.offset) { index, value in
                         LineMark(
                             x: .value("Jour", index),
                             y: .value("Prix", value)
@@ -72,12 +73,13 @@ struct BTCCardView: View {
                 }
                 .frame(height: 120)
                 .padding(.top, -16)
-                .animation(.easeInOut(duration: 0.5), value: vm.BTCHistory)
+                .animation(.easeInOut(duration: 0.5), value: vm.SOLHistory)
             }
             // effet rebond
             .scaleEffect(appear ? 1 : 0.8)
             .opacity(appear ? 1 : 0)
             .animation(.spring(), value: appear)
+            
             .frame(minHeight: 300)
             .padding() // Espacement interne pour que le contenu ne touche pas les bords
             .background(
@@ -114,5 +116,5 @@ struct BTCCardView: View {
     }
 }
 #Preview {
-    BTCCardView(vm: BTCViewModel())
+    SOLCardView(vm: SOLViewModel())
 }

@@ -1,9 +1,4 @@
-//
-//  ButtonViewCard.swift
-//  PorteFolioCrypto
-//
-//  Created by eric locci on 07/12/2025.
-//
+// PorteFolioCrypto/ButtonStyle/ButtonViewCard.swift
 
 import SwiftUI
 
@@ -22,5 +17,19 @@ struct ButtonCard<Content: View>: View {
                 .padding()
         }
         .buttonStyle(PlainButtonStyle())
+    }
+}
+#Preview("Crypto Style") {
+    ButtonCard(action: {}) {
+        VStack(spacing: 4) {
+            Text("Échanger")
+                .font(.headline)
+            Text("Convertir vos BTC en ETH")
+                .font(.caption)
+        }
+        .padding(.vertical, 8)
+        .padding(.horizontal, 16)
+        .background(Color.blue)
+        .cornerRadius(10)
     }
 }

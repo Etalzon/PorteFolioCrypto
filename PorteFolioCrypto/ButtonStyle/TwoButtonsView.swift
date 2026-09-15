@@ -1,9 +1,4 @@
-//
-//  TwoButtonsView.swift
-//  PorteFolioCrypto
-//
-//  Created by eric locci on 07/12/2025.
-//
+// PorteFolioCrypto/ButtonStyle/TwoButtonsView.swift
 
 import SwiftUI
 
@@ -27,4 +22,12 @@ struct TwoButtonsView: View {
         }
         .padding(.top, 8)
     }
+}
+#Preview("Crypto Action") {
+    TwoButtonsView(
+        leftButtonTitle: "Vendre",
+        rightButtonTitle: "Acheter",
+        leftAction: {},
+        rightAction: {}
+    )
 }

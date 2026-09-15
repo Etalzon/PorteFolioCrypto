@@ -1,9 +1,4 @@
-//
-//  VenteCrypto.swift
-//  PorteFolioCrypto
-//
-//  Created by eric locci on 07/12/2025.
-//
+// PorteFolioCrypto/ButtonTrading/VenteCrypto.swift
 
 import SwiftUI
 
@@ -68,5 +63,9 @@ struct VenteCrypto: View {
       }
       errorMessage = ""
    }
-
+}
+#Preview("Vente Crypto") {
+    NavigationStack {
+        VenteCrypto()
+    }
 }

@@ -1,17 +1,16 @@
-// PorteFolioCrypto/CardView/BTCCardView.swift
+// PorteFolioCrypto/CardView/XRPCardView.swift
 
 import SwiftUI
 import Charts
 
-struct BTCCardView: View {
-    @ObservedObject var vm: BTCViewModel
+struct XRPCardView: View {
+    @ObservedObject var vm: XRPViewModel
     @State private var appear = false
     
-    // Structure des prix pour l’historique des prix Bitcoin
-    struct PricePointBTC: Identifiable {
+    struct PricePointXrp: Identifiable {
         let id = UUID()
         let date: Date
-        let BTCPrice: Double
+        let WRPPrice: Double
     }
     
     var body: some View {
@@ -25,45 +24,39 @@ struct BTCCardView: View {
             .ignoresSafeArea()
             
             VStack(spacing: 8) {
-                // Logo
-                Image("Bitcoin_logo")
+                Image("Xrp_logo")
                     .resizable()
                     .frame(width: 48, height: 48)
-                    .foregroundColor(.orange)
+                    .foregroundColor(.blue)
                     .padding(.top, 8)
                 
-                // Symbole BTC
-                Text("BTC")
+                Text("XRP")
                     .font(.headline)
                     .foregroundColor(.black) // Ajouté pour la clarté
                 
-                // Prix actuel en USD
-                Text(String(format: "%.2f $", vm.BTCPrice))
+                Text(String(format: "%.2f $", vm.XRPPrice))
                     .font(.title)
                     .bold()
-                    .foregroundColor(.black) // Changé de .primary à .black
+                    .foregroundColor(.black) // Changé de .primary
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
                 
-                // Variation du prix
                 Text(vm.changeText)
                     .font(.subheadline)
-                    .foregroundColor(vm.BTCChange >= 0 ? .green : .red)
+                    .foregroundColor(vm.XRPChange >= 0 ? .cyan : .red)
                     .minimumScaleFactor(0.7)
                 
-                // Graphique de l’historique des prix Bitcoin
-                Chart(vm.BTCPriceHistory) { point in
+                Chart(vm.XRPPriceHistory) { point in
                     LineMark(
                         x: .value("Date", point.date),
-                        y: .value("Prix", point.BTCPrice)
+                        y: .value("Prix", point.WRPPrice)
                     )
                 }
                 .frame(height: 120)
                 .padding(.bottom, -16)
                 
-                // Graphique simplifié de l’historique des prix
                 Chart {
-                    ForEach(Array(vm.BTCHistory.enumerated()), id: \.offset) { index, value in
+                    ForEach(Array(vm.XRPHistory.enumerated()), id: \.offset) { index, value in
                         LineMark(
                             x: .value("Jour", index),
                             y: .value("Prix", value)
@@ -72,12 +65,13 @@ struct BTCCardView: View {
                 }
                 .frame(height: 120)
                 .padding(.top, -16)
-                .animation(.easeInOut(duration: 0.5), value: vm.BTCHistory)
+                .animation(.easeInOut(duration: 0.5), value: vm.XRPHistory)
             }
             // effet rebond
             .scaleEffect(appear ? 1 : 0.8)
             .opacity(appear ? 1 : 0)
             .animation(.spring(), value: appear)
+            
             .frame(minHeight: 300)
             .padding() // Espacement interne pour que le contenu ne touche pas les bords
             .background(
@@ -114,5 +108,5 @@ struct BTCCardView: View {
     }
 }
 #Preview {
-    BTCCardView(vm: BTCViewModel())
+    XRPCardView(vm: XRPViewModel())
 }

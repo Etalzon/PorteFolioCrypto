@@ -1,9 +1,4 @@
-//
-//  AchatCripto.swift
-//  PorteFolioCrypto
-//
-//  Created by eric locci on 07/12/2025.
-//
+// PorteFolioCrypto/ButtonTrading/AchatCripto.swift
 
 import SwiftUI
 
@@ -41,7 +36,6 @@ struct AchatCrypto: View {
                      }
                   }
                }
-            // Filtrage de l’entrée pour n’autoriser que les chiffres et un seul séparateur décimal
                .onChange(of: nombreBTCAchat) { oldValue, newValue in
                   nombreBTCAchat = formatDecimalInput(newValue)
                }
@@ -62,6 +56,7 @@ struct AchatCrypto: View {
                   .monospacedDigit()
                   .foregroundColor(.primary)
             }
+
             if !errorMessage.isEmpty {
                Text(errorMessage)
                   .foregroundColor(.red)
