@@ -24,7 +24,7 @@ struct XRPCardView: View {
             .ignoresSafeArea()
             
             VStack(spacing: 8) {
-                Image("Xrp_logo")
+                Image("xrp_logo")
                     .resizable()
                     .frame(width: 48, height: 48)
                     .foregroundColor(.blue)
@@ -54,7 +54,6 @@ struct XRPCardView: View {
                 }
                 .frame(height: 120)
                 .padding(.bottom, -16)
-                
                 Chart {
                     ForEach(Array(vm.XRPHistory.enumerated()), id: \.offset) { index, value in
                         LineMark(

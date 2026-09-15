@@ -7,7 +7,7 @@ struct BTCCardView: View {
     @ObservedObject var vm: BTCViewModel
     @State private var appear = false
     
-    // Structure des prix pour l’historique des prix Bitcoin
+    /// Structure des prix pour l’historique des prix Bitcoin
     struct PricePointBTC: Identifiable {
         let id = UUID()
         let date: Date
@@ -16,7 +16,7 @@ struct BTCCardView: View {
     
     var body: some View {
         ZStack {
-            // 1. Le dégradé qui prend tout l'écran
+            /// 1. Le dégradé qui prend tout l'écran
             LinearGradient(
                 gradient: Gradient(colors: [.blue.opacity(0.1), .white]),
                 startPoint: .top,
@@ -24,34 +24,35 @@ struct BTCCardView: View {
             )
             .ignoresSafeArea()
             
+            /// 2. Le contenu de la carte (votre code actuel)
             VStack(spacing: 8) {
-                // Logo
-                Image("Bitcoin_logo")
+                /// Logo
+                Image("bitcoin_logo")
                     .resizable()
                     .frame(width: 48, height: 48)
                     .foregroundColor(.orange)
                     .padding(.top, 8)
                 
-                // Symbole BTC
+                /// Symbole BTC
                 Text("BTC")
                     .font(.headline)
                     .foregroundColor(.black) // Ajouté pour la clarté
                 
-                // Prix actuel en USD
+                /// Prix actuel en USD
                 Text(String(format: "%.2f $", vm.BTCPrice))
                     .font(.title)
                     .bold()
-                    .foregroundColor(.black) // Changé de .primary à .black
+                    .foregroundStyle(.black)
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
                 
-                // Variation du prix
+                /// Variation du prix
                 Text(vm.changeText)
                     .font(.subheadline)
                     .foregroundColor(vm.BTCChange >= 0 ? .green : .red)
                     .minimumScaleFactor(0.7)
                 
-                // Graphique de l’historique des prix Bitcoin
+                /// Graphique de l’historique des prix Bitcoin
                 Chart(vm.BTCPriceHistory) { point in
                     LineMark(
                         x: .value("Date", point.date),
@@ -61,7 +62,7 @@ struct BTCCardView: View {
                 .frame(height: 120)
                 .padding(.bottom, -16)
                 
-                // Graphique simplifié de l’historique des prix
+                /// Graphique simplifié de l’historique des prix
                 Chart {
                     ForEach(Array(vm.BTCHistory.enumerated()), id: \.offset) { index, value in
                         LineMark(
@@ -74,7 +75,7 @@ struct BTCCardView: View {
                 .padding(.top, -16)
                 .animation(.easeInOut(duration: 0.5), value: vm.BTCHistory)
             }
-            // effet rebond
+            /// effet rebond
             .scaleEffect(appear ? 1 : 0.8)
             .opacity(appear ? 1 : 0)
             .animation(.spring(), value: appear)
@@ -93,8 +94,7 @@ struct BTCCardView: View {
                     )
                     .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 5)
             )
-            
-            // 4. On garde ton effet de couleur dynamique en overlay léger
+            /// 4. On garde ton effet de couleur dynamique en overlay léger
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
                     .fill(vm.changeColor.opacity(0.1))
@@ -107,7 +107,7 @@ struct BTCCardView: View {
                     vm.fetchHistory()
                 }
             }
-            // 5. Marges extérieures pour que la carte ne colle pas aux bords de l'écran
+            /// 5. Marges extérieures pour que la carte ne colle pas aux bords de l'écran
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
         }

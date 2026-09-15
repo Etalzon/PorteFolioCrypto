@@ -27,7 +27,7 @@ struct SOLCardView: View {
             // 2. Le contenu de la carte (votre code actuel)
             VStack(spacing: 8) {
                 // Logo Solana
-                Image("Solana_logo")
+                Image("solana_logo")
                     .resizable()
                     .frame(width: 48, height: 48)
                     .foregroundColor(.orange)
@@ -61,7 +61,6 @@ struct SOLCardView: View {
                 }
                 .frame(height: 120)
                 .padding(.bottom, -16)
-                
                 // Graphique simplifié de l’historique des prix
                 Chart {
                     ForEach(Array(vm.SOLHistory.enumerated()), id: \.offset) { index, value in
