@@ -1,7 +1,7 @@
 // PorteFolioCrypto/CryptoGridView.swift
+
 import SwiftUI
 
-// Garde seulement la vue principale ici
 struct CryptoGridView: View {
     @StateObject private var btcVM = BTCViewModel()
     @StateObject private var ethVM = ETHViewModel()
@@ -16,10 +16,10 @@ struct CryptoGridView: View {
 
     var cryptos: [Crypto] {
         [
-            Crypto(name: "BTC", view: AnyView(CryptoCardView(name: "BTC", image: "bitcoin_logo")), detailView: AnyView(BTCCardView(vm: btcVM))),
-            Crypto(name: "ETH", view: AnyView(CryptoCardView(name: "ETH", image: "ethereum_logo")), detailView: AnyView(ETHCardView(vm: ethVM))),
-            Crypto(name: "SOL", view: AnyView(CryptoCardView(name: "SOL", image: "solana_logo")), detailView: AnyView(SOLCardView(vm: solVM))),
-            Crypto(name: "XRP", view: AnyView(CryptoCardView(name: "XRP", image: "xrp_logo")), detailView: AnyView(XRPCardView(vm: xrpVM)))
+            Crypto(name: "BTC", view: AnyView(CryptoCardView(name: "BTC", image: "bitcoin_logo")), detailView: AnyView(GenericCryptoCardView(vm: btcVM, coinName: "Bitcoin", coinSymbol: "BTC", logoName: "bitcoin_logo"))),
+            Crypto(name: "ETH", view: AnyView(CryptoCardView(name: "ETH", image: "ethereum_logo")), detailView: AnyView(GenericCryptoCardView(vm: ethVM, coinName: "Ethereum", coinSymbol: "ETH", logoName: "ethereum_logo"))),
+            Crypto(name: "SOL", view: AnyView(CryptoCardView(name: "SOL", image: "solana_logo")), detailView: AnyView(GenericCryptoCardView(vm: solVM, coinName: "Solana", coinSymbol: "SOL", logoName: "solana_logo"))),
+            Crypto(name: "XRP", view: AnyView(CryptoCardView(name: "XRP", image: "xrp_logo")), detailView: AnyView(GenericCryptoCardView(vm: xrpVM, coinName: "Ripple", coinSymbol: "XRP", logoName: "xrp_logo")))
         ]
     }
 
